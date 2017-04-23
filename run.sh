@@ -4,7 +4,7 @@ if [ -v $1 ] || [ "$1" == "build" ]; then
 	chmod 744 target/trx-v1-jar-with-dependencies.jar
 	docker-compose up --build
 elif [ "$1" == "tests" ]; then
-	mvn test
+	mvn clean test -Dtest=TransactionsTests.java
 else
 	echo "[USAGE]: ./run.sh [<tests>/<build>]"
 fi
