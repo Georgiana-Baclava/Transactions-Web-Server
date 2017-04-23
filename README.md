@@ -1,10 +1,14 @@
 # Transactions-Web-Server
 
-This is a simple web server implemented in Java and it expose an API used for adding and analysing transactions.
+This is a simple web server that expose an API used for adding and analysing transactions.
 
-The data are received in JSON format and saved into MongoDB.
+
 
 ## IMPLEMENTATION
+
+It is an HTTP server implemented in Java. The data is received in JSON format and saved into MongoDB.
+
+The server is listening on port 5000.
 
 It spports the following operations:
 
@@ -19,6 +23,14 @@ in the given day.
 * GET to http://127.0.0.1:5000/balance/?user=XXXX&since=YYYY&until=ZZZZ Given a
 timeframe and an user, obtain the user's balance in the given timeframe. At the beginning of
 the timeframe the user has balance 0.
+
+
+For MongoDB connection, I've created a Singleton. Here, I initialize the MongoClient, the collection and I create the indexes for retrieving the data efficiently. The data is saved in the same format as received from post request.
+
+I used hash indexes for sender and receiver, as in the queries performed, there is no need for sorting based on them. For timestamp and sum I used range indexes in order to perform sorting on the data.
+
+Based on these indexes, all 3 operations have O(long(n)) complexity. Searching only for sender or receiver, is O(1), but the range indexes from timestamp and sum give the final complexity of O(long(n)).
+
 
 
 In run.sh, if the test parameter is set, the tests are runned via mvn clean test command.
@@ -50,3 +62,7 @@ In order to run the web server, use one of this commands:
  ./run.sh
  
  ./run.sh build
+
+## TODO
+
+Implement multithreaded version
