@@ -15,7 +15,6 @@ public class URLQueryParser {
             String name = param.split("=")[0];
             String value = param.split("=")[1];
             map.put(name, value);
-            System.out.println(name + value);
         }
         return map;
     }

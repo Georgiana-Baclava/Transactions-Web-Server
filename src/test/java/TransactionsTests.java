@@ -103,13 +103,10 @@ public class TransactionsTests {
             return false;
         }
 
-        System.out.println("ce primesc" + actual);
         ObjectMapper om = new ObjectMapper();
         for (int i = 0; i < expected.size(); i++) {
             Map<String, Object> m1 = (Map<String, Object>)(om.readValue(expected.get(i), Map.class));
             Map<String, Object> m2 = (Map<String, Object>)(om.readValue(actual.get(i), Map.class));
-            System.out.println(m1);
-            System.out.println(m2);
             if (!m1.equals(m2)) {
                 return false;
             }

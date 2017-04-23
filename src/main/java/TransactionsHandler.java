@@ -69,9 +69,6 @@ public class TransactionsHandler implements HttpHandler {
         DBObject sortCriteria = new BasicDBObject();
         sortCriteria.put("sum", 1);
 
-        DBObject explainObject = dbCollection.find(searchObject).sort(sortCriteria).explain();
-        System.out.println("sorting with Index--->"+explainObject);
-
         DBObject removeIdProjection = new BasicDBObject("_id", 0);
 
         DBCursor dbCursor = dbCollection.find(searchObject, removeIdProjection).sort(sortCriteria);
