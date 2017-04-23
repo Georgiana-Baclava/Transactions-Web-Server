@@ -1,0 +1,13 @@
+web_server:
+    build: .
+    ports:
+        - 5000:5000
+    links:
+        - mongo
+
+mongo:
+    image: mongo:3.4
+    container_name: mongo
+    command: mongod --smallfiles
+    expose:
+        - 27017
