@@ -11,6 +11,7 @@ public class Main {
     public static void main(String[] args) {
 
         try {
+            MongoDBConnection.INSTANCE.init("mongo");
             HttpServer server = HttpServer.create(new InetSocketAddress(5000), 0);
             server.createContext("/", new ServerHomeHandler());
             server.createContext("/transactions/", new TransactionsHandler());

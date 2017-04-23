@@ -1,6 +1,7 @@
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpServer;
 import org.json.simple.JSONObject;
+import org.junit.AfterClass;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,7 +22,8 @@ import java.util.Map;
 public class TransactionsTests {
 
     @BeforeClass
-    public static void dropDatabase() {
+    public static void initDatabase() {
+        MongoDBConnection.INSTANCE.init("localhost");
         MongoDBConnection.INSTANCE.getTrxCollection().drop();
     }
 
@@ -189,5 +191,10 @@ public class TransactionsTests {
         Assert.assertEquals(200, urlConnection.getResponseCode());
         Assert.assertEquals("0", result.toString());
         urlConnection.disconnect();
+    }
+
+    @AfterClass
+    public static void dropDatabaseAndCloseServer() {
+        MongoDBConnection.INSTANCE.getTrxCollection().drop();
     }
 }
