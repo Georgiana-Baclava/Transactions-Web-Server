@@ -31,6 +31,15 @@ I used hash indexes for sender and receiver, as in the queries performed, there 
 
 Based on these indexes, all 3 operations have O(long(n)) complexity. Searching only for sender or receiver, is O(1), but the range indexes from timestamp and sum give the final complexity of O(long(n)).
 
+* Post method
+I retrieve the request body, convert to JSONObject and insert it into database.
+
+* Get transactions based on a given user, day and threshold
+Given the day as timestamp (in seconds), the query search for all transactions for which one of the involved party is the user, the timestamp fits in the day interval given as parameter and the sum is greater than the threshold.
+
+* Get user balance in a specific interval
+I've created 2 queries: one for the amount received and the other for the amount sent.
+In the first query the user is representing the receiver, and in the last one the user is the transaction's sender.
 
 
 In run.sh, if the test parameter is set, the tests are runned via mvn clean test command.
