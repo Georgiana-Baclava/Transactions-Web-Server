@@ -15,7 +15,7 @@ public enum MongoDBConnection {
     private DBCollection trxCollection;
 
     MongoDBConnection() {
-        mongo = new MongoClient("localhost", 27017);
+        mongo = new MongoClient("mongo", 27017);
         db = mongo.getDB("webserver");
         trxCollection = db.getCollection("transactions");
 
