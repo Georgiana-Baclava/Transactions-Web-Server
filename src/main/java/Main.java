@@ -10,12 +10,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //uri parameters
-        //mongo indexes
-        //docker
-        //run.sh
-        //tests
-
         try {
             HttpServer server = HttpServer.create(new InetSocketAddress(5000), 0);
             server.createContext("/", new ServerHomeHandler());
